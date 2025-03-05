@@ -38,7 +38,7 @@ This tool processes weather sounding data from the University of Wyoming databas
 
 For users who don't want to install anything, you can use the online demo:
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/yourusername/weather-sounding-tool/blob/main/demo.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/meteoFurletov/weather-sounding-tool/blob/main/demo.ipynb)
 
 This allows you to:
 1. Run the tool directly in your browser
