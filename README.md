@@ -2,7 +2,6 @@
 
 Этот инструмент обрабатывает данные метеорологических зондирований из базы данных Университета Вайоминга. Он извлекает температурные инверсии и сохраняет их в файлах Excel для дальнейшего анализа.
 
-![Скриншот интерфейса](docs/screenshot.png)
 
 ## Особенности
 
@@ -41,7 +40,7 @@
 
 #### Онлайн в Google Colab (без установки)
 
-[![Открыть в Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/meteoFurletov/weather-sounding-tool/blob/main/demo.ipynb)
+[![Открыть в Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/meteoFurletov/weather-sounding-tool/blob/main/demo_ru.ipynb)
 
 1. Нажмите на кнопку "Открыть в Colab" выше
 2. Запустите все ячейки по порядку
