@@ -1,59 +1,91 @@
-# Weather Sounding Data Processor
+# Обработчик Метеорологических Зондирований
 
-This tool processes weather sounding data from the University of Wyoming database. It extracts temperature inversions and saves them as Excel files for analysis.
+Этот инструмент обрабатывает данные метеорологических зондирований из базы данных Университета Вайоминга. Он извлекает температурные инверсии и сохраняет их в файлах Excel для дальнейшего анализа.
 
-## Features
+![Скриншот интерфейса](docs/screenshot.png)
 
-- Download weather sounding data from the University of Wyoming
-- Handle connection issues by saving raw data locally
-- Extract temperature inversions below 1000m altitude
-- Generate individual Excel files for each sounding
-- Create a combined analysis file with multiple sheets
+## Особенности
 
-## Installation
+- Загрузка данных зондирования из базы данных Университета Вайоминга
+- Работа с локальными файлами для предотвращения проблем с соединением
+- Обнаружение температурных инверсий на высоте до 1000 метров
+- Создание отдельных файлов Excel для каждого зондирования
+- Формирование общего файла анализа с несколькими листами
+- Интерфейс для лёгкого использования
 
-1. Clone this repository:
+## Установка
+
+1. Клонировать репозиторий:
    ```bash
-   git clone https://github.com/yourusername/weather-sounding-tool.git
+   git clone https://github.com/meteoFurletov/weather-sounding-tool.git
    cd weather-sounding-tool
    ```
 
-2. Install dependencies:
+2. Установить зависимости:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. For GUI (optional):
+3. Для графического интерфейса (опционально):
    ```bash
-   # On Ubuntu/Debian:
+   # Для Ubuntu/Debian:
    sudo apt-get install python3-tk
    pip install tkcalendar
    ```
 
-## Usage
+## Использование
 
-### Option 1: Simple Command Line Interface
+### Способ 1: Через Jupyter Notebook (рекомендуется для начинающих)
 
-### Option 4: No Installation - Use Online Demo
+Самый простой способ использования инструмента - через интерактивный Jupyter Notebook. Вы можете запустить его локально или в облаке через Google Colab.
 
-For users who don't want to install anything, you can use the online demo:
+#### Онлайн в Google Colab (без установки)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/meteoFurletov/weather-sounding-tool/blob/main/demo.ipynb)
+[![Открыть в Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/meteoFurletov/weather-sounding-tool/blob/main/demo.ipynb)
 
-This allows you to:
-1. Run the tool directly in your browser
-2. Process data from the Wyoming database
-3. Download the results to your computer
+1. Нажмите на кнопку "Открыть в Colab" выше
+2. Запустите все ячейки по порядку
+3. Настройте параметры (год, месяц, идентификатор станции)
+4. Загрузите результаты на свой компьютер
 
-No installation required!
+#### Локально через Jupyter
 
-## Output Files
+1. Установите Jupyter, если его ещё нет:
+   ```bash
+   pip install jupyter
+   ```
 
-## Contributing
+2. Запустите Jupyter в папке проекта:
+   ```bash
+   jupyter notebook
+   ```
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+3. Откройте файл `demo.ipynb` и следуйте инструкциям
 
-## License
+### Способ 2: Простой текстовый интерфейс
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Для пользователей без GUI или Jupyter:
+
+### Способ 4: Без установки - Используйте онлайн демо
+
+Для пользователей, которые не хотят ничего устанавливать, вы можете использовать онлайн демо:
+
+[![Открыть в Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/meteoFurletov/weather-sounding-tool/blob/main/demo.ipynb)
+
+Это позволяет вам:
+1. Запустить инструмент прямо в вашем браузере
+2. Обработать данные из базы данных Вайоминга
+3. Загрузить результаты на свой компьютер
+
+Установка не требуется!
+
+## Выходные файлы
+
+## Вклад
+
+Вклады приветствуются! Пожалуйста, не стесняйтесь отправлять Pull Request.
+
+## Лицензия
+
+Этот проект лицензирован по лицензии MIT - см. файл [LICENSE](LICENSE) для подробностей.
 
