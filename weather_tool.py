@@ -33,17 +33,27 @@ logger = logging.getLogger(__name__)
 # --- DATA FETCHING FUNCTIONS ---
 
 
+def get_days_in_month(year, month):
+    """Return the number of days in a given month and year."""
+    import calendar
+
+    return calendar.monthrange(year, month)[1]
+
+
 def fetch_data(year, month, station, output_dir="data"):
     """Fetch weather sounding data and save to a local file"""
 
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
 
-    # Construct URL
+    # Get the number of days in the month
+    num_days = get_days_in_month(year, month)
+
+    # Construct URL with proper date range
     url = (
         f"http://weather.uwyo.edu/cgi-bin/sounding?region=europe&"
         f"TYPE=TEXT%3ALIST&YEAR={year}&MONTH={month:02d}&"
-        f"FROM=0100&TO=3112&STNM={station}"
+        f"FROM=0100&TO={num_days:02d}12&STNM={station}"
     )
     logger.info(f"Fetching data from: {url}")
 
