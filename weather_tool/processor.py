@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from .logger import logger
 from .fetcher import fetch_data
+import calendar
 
 
 def extract_soundings_from_html(html_content):
@@ -242,7 +243,7 @@ def create_combined_file(all_inversions, year, months):
     # Create full date range
     start_date = f"{year}-{months[0]:02d}-01"
     end_month = months[-1]
-    end_day = 31  # Using 31 for all months as pandas will auto-adjust
+    end_day = calendar.monthrange(year, end_month)[1]
     end_date = f"{year}-{end_month:02d}-{end_day}"
 
     dates = pd.date_range(start=start_date, end=end_date, freq="12H")
