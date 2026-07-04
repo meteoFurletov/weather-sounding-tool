@@ -1,0 +1,14 @@
+# Основные зависимости
+pandas
+numpy
+requests
+beautifulsoup4
+xlsxwriter
+openpyxl
+
+# Для чтения файлов Word (.docx) — новый сайт Вайоминга, копирование по срокам
+python-docx
+
+# Для графиков и анализа (inversion_analyzer, notebooks)
+matplotlib
+seaborn

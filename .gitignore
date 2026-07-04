@@ -9,6 +9,8 @@ soundings_*/
 *.html
 *.csv
 *.txt
+# ...but keep the dependency list tracked
+!requirements.txt
 
 # Log files
 *.log

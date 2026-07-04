@@ -12,13 +12,13 @@ import argparse
 def show_menu():
     """Display the main menu"""
     print("\n===== Weather Sounding Data Tool =====\n")
-    print("1. Fetch data from Wyoming database")
-    print("2. Process previously fetched data")
-    print("3. Fetch and process in one step")
-    print("4. View available data files")
-    print("5. Exit")
+    print("1. Скачать данные с сайта Вайоминга")
+    print("2. Обработать ранее скачанные данные")
+    print("3. Скачать и обработать за один шаг")
+    print("4. Показать доступные файлы данных")
+    print("5. Выход")
 
-    choice = input("\nEnter your choice (1-5): ")
+    choice = input("\nВыберите пункт (1-5): ")
     return choice
 
 
@@ -112,7 +112,6 @@ def process_data():
         str(start_month),
         "--station",
         str(station),
-        "--use-local",
     ]
 
     if start_month != end_month:
@@ -209,10 +208,10 @@ def main():
         elif choice == "4":
             view_available_data()
         elif choice == "5":
-            print("\nExiting. Goodbye!")
+            print("\nВыход. До свидания!")
             return 0
         else:
-            print("\nInvalid choice. Please try again.")
+            print("\nНеверный выбор. Попробуйте снова.")
 
 
 if __name__ == "__main__":

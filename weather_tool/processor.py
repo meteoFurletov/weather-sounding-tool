@@ -61,32 +61,19 @@ def extract_soundings_from_html(html_content):
     return soundings
 
 
-def process_sounding(raw_text, time):
-    """Process a single sounding to extract temperature inversions"""
+def detect_inversions(df, time):
+    """Detect low-level temperature inversions (<= 1000 m) in a sounding.
 
-    # Parse the raw text into rows
-    results = []
-    for line in raw_text.split("\n")[1:-1]:  # Skip header and footer
-        if "--" not in line:
-            row = [line[i : i + 7].strip() for i in range(0, len(line), 7)]
-            results.append(row)
+    ``df`` must be a numeric DataFrame that at least contains the ``TEMP`` and
+    ``HGHT`` columns. Returns a DataFrame with one row per level belonging to an
+    inversion layer, enriched with the metadata columns (``date``, ``ΔT``,
+    ``ΔH``, ``HL``, ``TL``, ``Ground``, ``Night``, ``Day``), or an empty
+    DataFrame when no inversion is found.
 
-    if len(results) < 2:
-        return None, None
-
-    # Create DataFrame
-    df = pd.DataFrame(results)
-    df.columns = df.iloc[0]
-    df = df[2:].reset_index(drop=True)  # Skip header rows
-
-    # Convert to numeric
-    try:
-        df = df.replace("", np.nan).astype(float)
-        df["SKNT"] = (df["SKNT"] * 0.51444444444444).round(2)  # Convert to m/s
-    except ValueError as e:
-        return None, None
-
-    # Improved inversion detection algorithm
+    This is the shared core used both by the web path (:func:`process_sounding`)
+    and the local Word/text path (``weather_tool.local_input``), so the
+    inversion definition stays identical regardless of the data source.
+    """
     inversions = []
     i = 0
 
@@ -141,6 +128,37 @@ def process_sounding(raw_text, time):
         df_inverse = df_inverse[df_inverse["HGHT"] <= 1000].drop_duplicates()
     else:
         df_inverse = pd.DataFrame()
+
+    return df_inverse
+
+
+def process_sounding(raw_text, time):
+    """Process a single sounding to extract temperature inversions"""
+
+    # Parse the raw text into rows
+    results = []
+    for line in raw_text.split("\n")[1:-1]:  # Skip header and footer
+        if "--" not in line:
+            row = [line[i : i + 7].strip() for i in range(0, len(line), 7)]
+            results.append(row)
+
+    if len(results) < 2:
+        return None, None
+
+    # Create DataFrame
+    df = pd.DataFrame(results)
+    df.columns = df.iloc[0]
+    df = df[2:].reset_index(drop=True)  # Skip header rows
+
+    # Convert to numeric
+    try:
+        df = df.replace("", np.nan).astype(float)
+        df["SKNT"] = (df["SKNT"] * 0.51444444444444).round(2)  # Convert to m/s
+    except (ValueError, KeyError):
+        return None, None
+
+    # Detect inversions using the shared core
+    df_inverse = detect_inversions(df, time)
 
     return df, df_inverse
 
@@ -246,7 +264,7 @@ def create_combined_file(all_inversions, year, months):
     end_day = calendar.monthrange(year, end_month)[1]
     end_date = f"{year}-{end_month:02d}-{end_day}"
 
-    dates = pd.date_range(start=start_date, end=end_date, freq="12H")
+    dates = pd.date_range(start=start_date, end=end_date, freq="12h")
     dates_df = pd.DataFrame({"date": dates})
 
     # Merge with full date range
